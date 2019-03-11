@@ -1,0 +1,85 @@
+<form [formGroup]="editForm" (ngSubmit)="onSubmit(editForm.value)" autocomplete="false" novalidate>
+  <div class="help-block" [hidden]="!err">
+    {{ err }}
+  </div>
+  <div *ngFor="let i of cols" [ngSwitch]="i.dataType">
+    <div *ngSwitchCase="'boolean'" class="flex">
+      <mat-slide-toggle [formControlName]="i.field">{{i.heading | labelcase}}</mat-slide-toggle>
+    </div>
+    <div *ngSwitchCase="'hidden'" class="flex">
+      <input type="hidden" [formControlName]="i.field" [placeholder]="i.heading | labelcase" />
+    </div>
+    <!-- <div *ngSwitchCase="'date'" class="flex">
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControlName]="i.field" autofocus>
+        <button type="button" matSuffix></button>
+      </mat-form-field>
+      <mat-datepicker #picker>
+      </mat-datepicker>
+    </div> -->
+    <div *ngSwitchCase="'select'" class="flex">
+      <mat-select [formControlName]="i.field" [placeholder]="i.heading" *ngIf="i.type !=='obj'" autofocus>
+        <mat-option *ngFor="let o of i.options" [value]="o">
+          {{ o }}
+        </mat-option>
+      </mat-select>
+      <mat-select [formControlName]="i.field" [placeholder]="i.heading" *ngIf="i.type==='obj' " autofocus>
+        <mat-option *ngFor="let o of i.options" [value]="o.val">
+          {{ o.name }}
+        </mat-option>
+      </mat-select>
+
+    </div>
+    <div *ngSwitchCase="'array'" class="flex">
+      <div *ngIf="item['_id']">
+        {{i.heading}}
+        <div *ngIf="!i.disabled">
+          <mat-checkbox *ngFor="let user of remainingItems[i.field]" (change)="assign($event,i.field, user, checked, i.options)" autofocus>
+            {{user.name}}
+          </mat-checkbox>
+        </div>
+
+        <input [formControlName]="i.field" [(ngModel)]="item[i.field]" type="hidden" [placeholder]="i.heading | labelcase " autofocus
+        />
+        <mat-chip-list class="mat-chip-list-stacked ">
+          <mat-chip *ngFor="let chip of item[i.field]" selected="true " color="primary" (click)="remove(chip, i.field,
+          i.disabled) ">
+            {{chip.name}}
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+    <div *ngSwitchCase="'number'" class="flex">
+      <mat-form-field>
+        <input matInput type="text" [formControlName]="i.field" [name]="i.field" [placeholder]="i.heading | labelcase" autofocus
+        />
+      </mat-form-field>
+      <div *ngIf="editForm.get(i.field).hasError('required') && editForm.get(i.field).touched">
+        {{i.heading | labelcase}} is required
+      </div>
+      <div *ngIf="editForm.get(i.field).hasError('pattern') && editForm.get(i.field).touched">
+        {{i.heading | labelcase}} must be a number.
+      </div>
+    </div>
+    <div *ngSwitchCase="'image'" class="flex ">
+      <mat-form-field>
+        <input matInput type="text" [formControlName]="i.field" [name]="i.field " [placeholder]="i.heading | labelcase" autofocus
+        />
+        <mat-icon matPrefix (click)="chooseImage(i.field)" class="pointer">image</mat-icon>
+      </mat-form-field>
+    </div>
+    <div *ngSwitchDefault class="flex">
+      <mat-form-field>
+        <input matInput type="text " [formControlName]="i.field" [name]="i.field" [placeholder]="i.heading | labelcase" autofocus
+        />
+      </mat-form-field>
+      <div *ngIf="editForm.get(i.field).hasError( 'required') && editForm.get(i.field).touched">
+        {{i.heading | labelcase}} is required
+      </div>
+    </div>
+  </div>
+  <br/>
+  <div fxLayoutAlign="center center">
+    <submit-button [loading]="loading" [form]="editForm" icon="save"></submit-button>
+  </div>
+</form>

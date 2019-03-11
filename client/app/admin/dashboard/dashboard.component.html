@@ -1,0 +1,24 @@
+<mat-sidenav-container>
+  <div class="app-content">
+    <h2>Dashboard</h2>
+    <div class="dashboard-cards">
+      <div *ngFor="let i of (cards | dashboardFilter:'dashboard')">
+          
+          <div class="gradient-card" [ngClass]="i.color" *ngIf="auth.hasRole(i.authenticate) && this.auth.currentUser.role ==='privatevendor' && (i.name ==='Create Private User' || i.name !=='Create Private User' )" [routerLink]="i.url">
+              <mat-icon>{{i.icon}}</mat-icon>
+              <div class="content">
+                <div class="header">{{i.name}}</div>
+                <div>&nbsp;</div>
+              </div>
+            </div>
+        <div class="gradient-card" [ngClass]="i.color" *ngIf="auth.hasRole(i.authenticate) && this.auth.currentUser.role ==='admin' && i.name !=='Create Private User'" [routerLink]="i.url">
+          <mat-icon>{{i.icon}}</mat-icon>
+          <div class="content">
+            <div class="header">{{i.name}}</div>
+            <div>&nbsp;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-sidenav-container>

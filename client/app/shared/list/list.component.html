@@ -1,0 +1,86 @@
+<button mat-fab class="floating-fab" *ngIf="!no.add" color="accent" routerLink="{{url}}/new">
+  <mat-icon>add</mat-icon>
+</button>
+<div [ngBusy]="busy"></div>
+
+<div class="app-content cp-container">
+  <mat-card fxFlex>
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="example-scrolling-content">
+      <h3>{{title}}</h3>
+      <span class="app-toolbar-filler"></span>
+      <div *ngIf="!no.search">
+        <button mat-icon-button *ngIf="showFilter" (click)="showFilter=false">
+          <mat-icon class="filtericon">search</mat-icon>
+        </button>
+        <mat-form-field *ngIf="showFilter" fxFlex>
+          <input type="text" [value]="filterText" placeholder="Filter" [formControl]="filterInput" matInput autofocus/>
+        </mat-form-field>
+        <button mat-icon-button *ngIf="showFilter" (click)="showFilter=false;filterText='';flush();getData({ sort: '-updatedAt' })">
+          <mat-icon class="filtericon">close</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="!showFilter" (click)="showFilter=true">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+      </div>
+      <export [data]="data" *ngIf="!no.export"></export>
+    </div>
+
+    <div class="mt20" fxLayout="column" fxLayoutAlign="center center">
+      <mat-card *ngIf="!meta.busy && data.length===0" class="noproduct" fxLayoutAlign="center center" fxLayout="column">
+        <div>No {{title}} found</div>
+      </mat-card>
+    </div>
+
+    <div infiniteScroll infiniteScrollDistance="2" infiniteScrollThrottle="500" (scrolled)="scroll()" scrollWindow="false" id="exportable"
+      *ngIf="data.length>0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th *ngFor="let h of fie">
+              <a class="sort" (click)="reverse=!reverse;order(h.field)" *ngIf="!no.sort && !h.noSort" fxLayout="row">
+                {{h.heading | labelcase}}
+                <mat-icon *ngIf="reverse && h.field === sort.predicate">arrow_downward</mat-icon>
+                <mat-icon *ngIf="!reverse && h.field === sort.predicate">arrow_upwards</mat-icon>
+              </a>
+              <span *ngIf="no.sort || h.noSort">
+                {{h.heading | labelcase}}
+              </span>
+            </th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let d of data; let i = index;">
+            <td>{{i+1}}</td>
+            <td *ngFor="let f of fie" [ngSwitch]="f.dataType">
+              <img [src]="d[f.field]" err-src="/assets/img/1px.png" width="100px" *ngSwitchCase="'image'" />
+              <img [src]="'uploads/'+d.variants[0].image" err-src="/assets/img/1px.png" width="100px" *ngSwitchCase="'product-image'" />
+              <span *ngSwitchCase="'date'">{{d[f.field] | date}}</span>
+              <!--<mat-slide-toggle [checked]="d[f.field]" *ngSwitchCase="'boolean'"></mat-slide-toggle>-->
+              <mat-checkbox [checked]="d[f.field]" *ngSwitchCase="'boolean'" disabled="true">
+              </mat-checkbox>
+              <a *ngSwitchCase="'product-detail'" routerLink="/product/{{d[f.slug]}}/{{d[f.id]}}">{{d[f.field]}}</a>
+              <span *ngSwitchDefault>{{d[f.field]}}</span>
+            </td>
+            <td>
+              <button *ngIf="!no.clone" mat-icon-button (click)="clone(d)">
+                <mat-icon>content_copy</mat-icon>
+              </button>
+              <button *ngIf="!no.edit" mat-icon-button routerLink="{{url}}/{{d._id}}">
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button *ngIf="!no.delete" mat-icon-button (click)="delete(d)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div style="text-align:center" *ngIf="!meta.busy">
+      <button mat-button mat-raised-button (click)="scroll()" *ngIf="!meta.end">
+        <mat-icon>arrow_downwards</mat-icon>Load More...</button>
+    </div>
+  </mat-card>
+</div>

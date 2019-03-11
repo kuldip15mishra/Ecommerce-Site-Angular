@@ -1,0 +1,68 @@
+<div class="app-content cp-container">
+  <mat-card>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <h3>Categories</h3>
+      <form [formGroup]="form" (ngSubmit)="addNode(form.value,tree.treeModel)" fxLayout="row" *ngIf="showAdd">
+        <mat-form-field fxFlex>
+           
+          <input matInput placeholder="Add new category" formControlName="name" />
+          
+        </mat-form-field>
+        <br/>
+        <mat-form-field fxFlex>
+          
+            <input matInput style="width:50px;"  type="number"  placeholder="Add Allocation Number" formControlName="allocatedValue" />
+      
+        </mat-form-field>
+        
+        <submit-button [form]="form" text="Save" icon="lock"></submit-button>
+        <button mat-icon-button *ngIf="showAdd" (click)="showAdd=false;">
+          <mat-icon>close</mat-icon>
+        </button>
+      </form>
+
+      <span class="app-toolbar-filler"></span>
+      <div>
+        <button mat-icon-button *ngIf="showFilter" (click)="showFilter=false">
+          <mat-icon>search</mat-icon>
+        </button>
+        <mat-form-field *ngIf="showFilter" fxFlex>
+          <input matInput autofocus [formControl]="filterInput" placeholder="filter nodes" (keyup)="filterNodes(filterInput._value, tree)"
+          />
+        </mat-form-field>
+        <button mat-icon-button *ngIf="showFilter" (click)="showFilter=false;filterInput._value='';filterNodes(filterInput._value, tree)">
+          <mat-icon>close</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="!showAdd" (click)="showAdd=true;showFilter=false;">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button *ngIf="!showFilter" (click)="showFilter=true;showAdd=false;">
+          <mat-icon>filter_list</mat-icon>
+        </button>
+        <button mat-icon-button (click)="tree.treeModel.expandAll()">
+          <mat-icon>expand_more</mat-icon>
+        </button>
+        <button mat-icon-button (click)="tree.treeModel.collapseAll()">
+          <mat-icon>expand_less</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <div id="exportable">
+      <div style="height: 90vh; width: 600px">
+        <tree-root #tree [nodes]="categories" [options]="customTemplateStringOptions"
+         [focused]="true" (moveNode)="moveNode($event)">
+          <ng-template #treeNodeTemplate let-node>
+            <div (mouseenter)="mouse($event,true)" (mouseleave)="mouse($event,false)">
+              
+              <span title="{{node.data.subTitle}}">{{ node.data.name }}</span>
+              <span class="pull-right">{{ childrenCount(node) }}</span>                
+              <button class="nodisplay" mat-icon-button (click)="removeNode(node,tree.treeModel)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
+          </ng-template>
+          <ng-template #loadingTemplate>Loading, please hold....</ng-template>
+        </tree-root>
+      </div>
+    </div>

@@ -1,0 +1,37 @@
+<div fxLayout="column" fxLayoutAlign="space-around center" fxOffset="30">
+  <h1>Edit Profile</h1>
+  <form [formGroup]="profileForm" (ngSubmit)="saveUser(profileForm.value)" autocomplete="false" novalidate fxLayout="column"
+    fxLayoutAlign="space-around stretch">
+    <img [src]="profileForm.value.avatar" *ngIf="profileForm.value.avatar" />
+    <div class="help-block" [hidden]="!errMessage">
+      {{ errMessage }}
+    </div>
+    <mat-form-field fxFlex>
+      <input matInput type="name" name="name" formControlName="name" placeholder="Name" autofocus />
+    </mat-form-field>
+    <div [hidden]="profileForm.get('name').valid || (profileForm.get('name').pristine && !submitted)">
+      <div *ngIf="profileForm.get('name').hasError('required')" class="error">
+        Name is required
+      </div>
+      <div *ngIf="profileForm.get('name').hasError('minlength')" class="error">
+        Name must be minimum 3 characters
+      </div>
+    </div>
+    <mat-form-field fxFlex>
+      <input matInput type="email" name="email" placeholder="Email" [value]="auth.currentUser.email" disabled/>
+    </mat-form-field>
+    <mat-form-field fxFlex>
+      <input matInput type="text" name="avatar" formControlName="avatar" placeholder="Avatar" />
+      <mat-icon mdPrefix (click)="chooseImage()" class="pointer">add_to_photos</mat-icon>
+    </mat-form-field>
+    <div [hidden]="profileForm.get('avatar').valid || (profileForm.get('avatar').pristine && !submitted)">
+      <div *ngIf="profileForm.get('avatar').hasError('required')" class="error">
+        Avatar url required
+      </div>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="center stretch">
+      <submit-button fxFlex [loading]="loading" [form]="profileForm" icon="save" text="Save"></submit-button>
+    </div>
+    <br/>
+  </form>
+</div>

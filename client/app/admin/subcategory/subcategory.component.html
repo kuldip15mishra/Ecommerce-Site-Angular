@@ -1,0 +1,61 @@
+<div [ngBusy]="busy"></div>
+<form [formGroup]="productForm" (ngSubmit)="save(productForm.value)" autocomplete="false" novalidate>
+  <button mat-fab class="floating-fab" color="accent" type="submit">
+    <mat-icon>save</mat-icon>
+  </button>
+  <div class="app-content" fxLayout="column" fxLayoutAlign="space-around stretch">
+    <div class="page-title" fxFlex>
+    
+      <span fxHide.lt-sm>SubCategory Add</span>
+      <h3>
+
+
+      </h3>
+
+    </div>
+    <section>
+      <article>
+        <h3>SubCateory Info</h3>
+        <div class="column">
+          <div fxLayout="column" fxLayout.gt-xs="row" fxLayoutAlign="space-between center" fxLayoutGap="10px">
+            <mat-form-field fxFlex>
+              <input matInput type="name" name="name" formControlName="name" placeholder="Name" />
+            </mat-form-field>
+            <mat-form-field fxFlex>
+              <input matInput type="slug" name="slug" formControlName="slug" placeholder="Slug" />
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="sku" name="sku" formControlName="sku" placeholder="SKU" style="width:30px" />
+            </mat-form-field>
+          </div>
+          <mat-form-field class="full-width">
+            <textarea matInput name="description" formControlName="description" placeholder="Description"></textarea>
+          </mat-form-field>
+        </div>
+      </article>
+      <article>
+        <h3>Settings</h3>
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div fxLayout="row" fxFlex="50">
+            <mat-slide-toggle class="mat-primary" formControlName="active" class="pull-left">Active</mat-slide-toggle>
+            <mat-slide-toggle class="mat-warn" formControlName="approved">Approved</mat-slide-toggle>
+            <mat-slide-toggle class="mat-accent" formControlName="hot">Hot</mat-slide-toggle>
+            <mat-slide-toggle class="mat-secondary" formControlName="new">New</mat-slide-toggle>
+            <mat-slide-toggle class="mat-secondary" formControlName="sale">Sale</mat-slide-toggle>
+          </div>
+          <div fxLayout="row" fxFlex="50">
+          
+            <mat-select placeholder="Category" formControlName="category" floatPlaceholder="never">
+              <mat-option *ngFor="let category of categories" [value]="category._id">
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+      </article>
+    </section>
+
+
+
+  </div>
+</form>

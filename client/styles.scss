@@ -1,0 +1,361 @@
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~angular2-busy/build/style/busy.css';
+@import '~nouislider/distribute/nouislider.min.css';
+@import '~angular-tree-component/dist/angular-tree-component.css';
+
+th {
+    color: #828282;
+    text-align: left;
+    font-size: .75em;
+    font-weight: 700;
+    padding: 16px 16px 16px 0;
+}
+h3{
+  margin:0 7px 0 0;
+}
+.mt20{
+  padding-top:20px;
+}
+.page-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding:10px 15px;
+    box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+    height: 35px;
+}
+.primary-color {
+    color: #3F51B5!important;
+  }
+.accent-color {
+    color: #FF4081!important;
+  }
+.background-primary-color {
+    background-color: #3F51B5!important;
+  }
+.background-accent-color {
+    background-color: #FF4081!important;
+  }
+.white-text {
+    color: #FFF!important;
+}
+.mat-raised-button.fb{
+  text-transform: uppercase;
+  color: #039be5!important;
+}
+.mute{
+    color: #999;
+}
+.noproduct{
+    background:greenyellow;
+    width:80%;
+    margin-top:10px;
+}
+salientink-root{
+   height:100%;display:flex;flex-direction: column;justify-content: space-between;
+}
+.mat-sidenav-content{
+  display:flex!important;flex-direction: column!important;justify-content: space-between!important;
+}
+img {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+    border:0;
+}
+button.close{
+    position: absolute;
+    top:1px;
+    right:1px;
+}
+a.product-link {
+    font-weight: 700;
+    color: orangered;
+    transition: color .5s ease 0s;
+    text-decoration: none;
+}
+hr{
+  margin-top: 2px;
+    color: #ccc;
+    background: #ccc;
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.1);
+}
+img.list-image {
+  border-radius: 30px;
+  width: 42px;
+  margin: 8px 16px;
+  border: 1px solid #eee;
+}
+table tr td, table tr th {
+    border-bottom: 1px solid #e6e6e6;
+}
+list-image div, list-image img {
+  border-radius: 30px;
+  width: 42px;
+  margin: 8px 16px;
+  border: none;
+  color: #fff;
+}
+list-image div.mat-light-blue-dark-theme, list-image img.mat-light-blue-dark-theme {
+  color: #000;
+  border: 1px solid #888;
+}
+list-image div {
+  height: 42px;
+  text-align: center;
+  line-height: 42px;
+}
+
+list-image div span {
+  font-size: 20px;
+}
+
+table {
+    width: 100%;
+    display: table;
+}
+
+thead {
+    border-bottom: 1px solid #d0d0d0;
+}
+
+td, th {
+    padding: 15px 5px;
+    display: table-cell;
+    text-align: left;
+    vertical-align: middle;
+    border-radius: 2px;
+}
+
+
+html, body {
+  margin: 0;
+  background: #eee;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  height: 100%;
+  flex-direction: column;
+  display: flex;
+}
+table thead th a {
+  cursor:  pointer;
+}
+mat-sidenav {
+  width: 320px;
+}
+div[routerlink] {
+    cursor: pointer;
+}
+.avatar {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  display: inline-block;
+  overflow: hidden;
+  margin: 0;
+  vertical-align: middle;
+  zoom: 0.70;
+  transform: translateZ(0);
+  -webkit-transform: scale(0.70);
+  -moz-transform: scale(0.70);
+}
+
+.mat-list-item {
+  height: initial!important;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+.item{
+  align-self: center;
+  margin: auto;
+}
+.mr10{
+  margin-right: 10px;
+}
+.col {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+}
+.row{
+  flex-direction: row;
+  display: flex;
+  flex:1;
+  flex-wrap: true;
+}
+.space-between{
+  justify-content: space-between;
+}
+.center{
+  justify-content: center;
+  align-items: center;
+}
+.stretch{
+  align-items: stretch;
+}
+.pull-left{
+  align-self: flex-start;
+}
+.pull-right{
+  align-self: flex-end;
+}
+mat-sidenav-container.m2app-dark {
+  background: black;
+}
+
+.app-content {
+  padding: 20px;
+}
+
+.app-content mat-card mat-card-content{
+  padding: 20px;
+}
+
+.app-sidenav {
+  padding: 10px;
+  min-width: 100px;
+}
+
+.app-content mat-checkbox {
+  margin: 10px;
+}
+
+.app-toolbar-filler {
+  flex: 1 1 auto;
+}
+
+.app-toolbar-menu {
+  padding: 3px 14px 0 14px;
+  color: white;
+}
+
+.app-icon-button {
+  box-shadow: none;
+  user-select: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  filter: none;
+  font-weight: normal;
+  height: auto;
+  line-height: inherit;
+  margin: 0;
+  min-width: 0;
+  padding: 0;
+  text-align: left;
+  text-decoration: none;
+}
+
+.app-action {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.app-spinner {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+}
+
+.app-input-icon {
+  font-size: 16px;
+}
+
+.app-list {
+  border: 1px solid rgba(0,0,0,0.12);
+  width: 350px;
+  margin: 20px;
+}
+
+.app-progress {
+  margin: 20px;
+}
+
+.mat-sidenav {
+  background-color: inherit !important;
+}
+mat-toolbar-row {
+  justify-content: space-between;
+}
+
+.done {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+}
+
+.muted{
+  color: #ccc;
+}
+
+.success{
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+  opacity: 1;
+  color: green;
+}
+
+.err{
+  font-size: 12px;
+  line-height: 14px;
+  transition: all 0.3s cubic-bezier(0.55, 0, 0.55, 0.2);
+  opacity: 1;
+  margin-top: 0;
+  padding-top: 5px;
+  color: red;
+}
+.browserupgrade {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+mat-sidenav {
+  fill: #737373;
+}
+
+
+
+mat-toolbar .mat-toolbar-tools.toolbar-tools-fab-overlap {
+  padding-left: 78px;
+}
+mat-toolbar .mat-button:not(.mat-fab) {
+  min-width: 1em;
+}
+mat-toolbar .subtitle {
+  font-size: .5em;
+}
+mat-toolbar.mat-tall button.mat-button.mat-fab.fab-overlap.mat-fab-top-right, mat-toolbar.mat-tall button.mat-button.mat-fab.fab-overlap.mat-fab-top-left {
+  top: 112px;
+}
+mat-toolbar.mat-medium-tall button.mat-button.mat-fab.fab-overlap.mat-fab-top-right, mat-toolbar.mat-medium-tall button.mat-button.mat-fab.fab-overlap.mat-fab-top-left {
+  top: 72px;
+}
+mat-toolbar.mat-medium-tall button.mat-button.mat-fab.fab-overlap.mat-fab-top-left {
+  left: 12px;
+}
+
+
+mat-list.fab-padding {
+  padding-bottom: 56px;
+}
+mat-list .list-info {
+  color: rgba(0, 0, 0, 0.24);
+}
+mat-list mat-item.selected {
+  background: #e3f2fd;
+}
+mat-list mat-item.list-head {
+  color: #888;
+}
+mat-list mat-item.list-head mat-item-content {
+  padding-left: 64px;
+}
+
+

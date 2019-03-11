@@ -1,0 +1,27 @@
+<div fxLayout="row">
+  <content fxLayout="column">
+    <section fxLayout="column" fxLayoutAlign="center center">
+      <h1>Cancel Order</h1>
+      <form [formGroup]="myForm" name="form" novalidate>
+        <section class="section" fxLayout="column">
+          <mat-form-field>
+            <label>Reason</label>
+            <textarea name="order" rows="3" matInput formControlName="comment"></textarea>
+            <!--<div ng-messages="form.comment.$error" ng-if="form.comment.$dirty">
+              <div ng-message="required">Reason required</div>
+            </div>-->
+          </mat-form-field>
+        </section>
+        <div class="mat-dialog-actions" fxLayout="column" fxLayoutAlign="center center">
+          <div class="error" fxLayoutAlign="center center">{{message}}</div>
+          <div fxLayout="row">
+            <button type="button" mat-raised-button class="mat-primary" (click)="dialogRef.close({comment: myForm.value.comment})">
+              <mat-icon>save</mat-icon>
+              Save</button>
+            <button type="button" mat-button (click)="dialogRef.close()">Cancel</button>
+          </div>
+        </div>
+      </form>
+    </section>
+  </content>
+</div>

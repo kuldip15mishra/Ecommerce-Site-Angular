@@ -1,0 +1,36 @@
+html, body{
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif
+}
+
+a.active {
+  background-color: gray;
+}
+mat-list-item img{
+  width:50px;
+}
+.product-image{
+    height:100px;
+    width:50px;
+}
+.column{
+    align-items: stretch;
+}
+.example-sidenav-fab-container {
+  height: 100vh;
+}
+
+.app-height {
+  min-height:89vh;
+}
+.floating-fab {
+  position: fixed !important;
+  right: 20px;
+  bottom: 20px;
+  z-index: 1000;
+}
+.example-fab {
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+}

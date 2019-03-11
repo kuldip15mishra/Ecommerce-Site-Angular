@@ -1,0 +1,66 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <h2>
+        <span class="mute">My Account</span> > Wishlist</h2>
+    <!--<mat-form-field>
+        <input matInput placeholder="Search Wishlist" [disabled]="!wishlists || wishlists.length===0">
+    </mat-form-field>-->
+</div>
+<div [ngBusy]="busy"></div>
+<div class="mt20" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card *ngIf="!wishlists || wishlists.length===0" class="noproduct" fxLayoutAlign="center center" fxLayout="column">
+        <div>Wishlist is empty</div>
+    </mat-card>
+</div>
+<mat-card *ngFor="let wish of wishlists;let i = index;">
+    <button mat-button mat-icon-button (click)="delete(wish._id)" class="close">
+        <mat-icon>close</mat-icon>
+    </button>
+    <mat-card-content fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start">
+        <div class="description" fxFlex>
+            <mat-list>
+                <mat-list-item fxLayout="row" fxLayout.xs="column">
+                    <img mat-list-avatar [src]="'uploads/'+wish.variant.image" class="img" onError="this.src='/assets/img/product-placeholder.png'"
+                    />
+                    <div fxFlexOffset="2">
+                        <div mat-line>
+                            <b>
+                                <a class="product-link" routerLink="/product/{{wish.product.slug}}/{{wish.product._id}}">{{wish.product.name}}</a>
+                            </b>
+                        </div>
+                        <div mat-line>
+                            <b>Price:</b> {{wish.variant.price | currency : Settings.currency.code}} </div>
+                        <div mat-line>
+                            <b>Size:</b> {{wish.variant.size}} </div>
+                        <div mat-line>
+                            <b>Created:</b> {{wish.created | date}} </div>
+                        <br/>
+                        <cart-buttons [variant]="wish.variant" [product]="wish.product"></cart-buttons>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+        <div class="address" fxFlex="30" fxFlex.xs="100">
+            <div mat-line>
+                <b>Features</b>
+            </div>
+            <hr/>
+            <div mat-line class="mute">
+                <p mat-line *ngFor="let f of wish.product.keyFeatures"> {{f.key}}: {{f.val}}</p>
+            </div>
+        </div>
+    </mat-card-content>
+
+    <!--<mat-card-content>
+        <mat-list>
+            <mat-list-item>
+                <img mat-list-avatar [src]="wish.variant.image" onError="this.src='/assets/img/product-placeholder.png'" class="pull-left"
+                />
+                <h4 mat-line><a routerLink="/product/{{wish.product.slug}}/{{wish.product._id}}">{{wish.product.name}}</a></h4>
+                <p mat-line> Size: {{wish.variant.size}}</p>
+                <p mat-line> Weight: {{wish.variant.weight}}</p>
+                <p mat-line> Price: {{wish.variant.price}}</p>
+                <p mat-line> Created: {{wish.created | date}} </p>
+            </mat-list-item>
+        </mat-list>
+    </mat-card-content>-->
+</mat-card>

@@ -1,0 +1,6 @@
+.hidebuttons button{
+visibility: hidden;
+}
+.nodisplay{
+visibility: hidden;
+}

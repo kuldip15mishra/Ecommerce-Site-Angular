@@ -1,0 +1,23 @@
+<div id="content">
+  <div class="list">
+    <div class="product-card">
+      <div class="bestseller-badge" *ngIf="product.sale">
+        <mat-icon>star</mat-icon>
+        <span class="txt">Sale</span>
+        <mat-icon>star</mat-icon>
+      </div>
+      <span class="card_title" routerLink="/product/{{product.slug}}/{{product._id}}">{{product.name}}</span>
+      <span class="variants">
+        <div [ngClass]="{'highlight': v._id === i._id }" class="variant" *ngFor="let v of product?.variants" (click)="changeVariant(v)"
+          >{{v.size}}</div>
+      </span>
+      <figure>
+        <img [src]="'uploads/'+i?.image" onError="this.src='/assets/img/product-placeholder.png'" />
+      </figure>
+      <span class="price"> {{i?.price | currency : Settings.currency.code}}
+        <del class="del" *ngIf="i?.price !== i?.mrp">{{i?.mrp | currency : Settings.currency.code}}</del>
+      </span>
+      <cart-buttons [parentCategoryID]="parentCategoryID" [variant]="i" [product]="product"></cart-buttons>
+    </div>
+  </div>
+</div>

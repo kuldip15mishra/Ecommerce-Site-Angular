@@ -1,0 +1,16 @@
+<div [formGroup]="featuresForm">
+  <td>
+    <mat-select placeholder="Key" formControlName="key" style="min-width:80px;">
+      <mat-option *ngFor="let o of features | unique: 'key'" value="{{o.key}}">
+        {{o.key}}
+      </mat-option>
+    </mat-select>
+  </td>
+  <td>
+    <mat-select placeholder="Value" formControlName="val" style="min-width:80px;">
+      <mat-option *ngFor="let o of features | filter: featuresForm.get('key').value | unique: 'val'" value="{{o.val}}">
+        {{o.val}}
+      </mat-option>
+    </mat-select>
+  </td>
+</div>

@@ -1,0 +1,89 @@
+<megamenu></megamenu>
+<!--<div *ngIf="msg"> {{msg}} </div>-->
+<div class="center">
+  <div fxLayout="row" fxLayoutAlign="center start" fxLayoutWrap>
+    <mat-card class="checkout-card">
+      <form [formGroup]="checkoutForm" autocomplete="false" novalidate>
+        <h3>Process Order</h3>
+        <mat-card-content>
+          <table class="checkout-table">
+            <tr>
+              <td>Cart Total:</td>
+              <td>{{cart.getTotalPrice() | currency : Settings.currency.code}}</td>
+            </tr>
+            <tr>
+              <td>Shipping</td>
+              <td>
+                <span *ngIf="shipping?.best?.charge<=0 ">Free</span>
+                <span *ngIf="shipping?.best?.charge>0"> {{shipping?.best?.charge | currency : Settings.currency.code}} [{{shipping?.best?.carrier}}] Add {{shipping?.free?.freeShipping
+                  - cart.getTotalPrice() | currency : Settings.currency.code}} more for free shipping through {{shipping?.free?.carrier}}
+                </span>
+              </td>
+              <td *ngIf="shipping?.best.charge === undefined">
+                Sorry, but no supplier supplies to your location
+              </td>
+            </tr>
+            <!-- <tr>
+              <td>Discount Coupon:</td>
+              <td>
+                <mat-form-field class="w100">
+                  <input matInput formControlName="coupon" #coupon />
+                </mat-form-field>
+                <button type="button" [disabled]="couponCode" mat-button (click)="applyCoupon(coupon.value)">Apply</button>
+                <button mat-button (click)="removeCoupon()" *ngIf="couponCode">{{couponCode}}
+                  <mat-icon>close</mat-icon>
+                </button>
+              </td>
+            </tr> -->
+            <tr>
+              <td>Payment Method:</td>
+              <td>
+                <mat-radio-group formControlName="selectedPaymentMethod">
+                  <mat-radio-button *ngFor="let paymentMethod of Settings.paymentMethods" [value]="paymentMethod">
+                    {{paymentMethod}}&nbsp;&nbsp;&nbsp;&nbsp;
+                  </mat-radio-button>
+                </mat-radio-group>
+              </td>
+            </tr>
+            <tr>
+              <td>Total Amount:</td>
+              <td>
+                <h2>{{cart.getTotalPrice() | currency : Settings.currency.code}}</h2>
+              </td>
+            </tr>
+          </table>
+        </mat-card-content>
+        <mat-card-actions>
+          <button class="checkout-button circular-progress-button" mat-raised-button color="primary" (click)="checkout(checkoutForm.value)"
+            [disabled]=" isPrivateVendor ? false :  cart.getTotalPrice()===0">
+            <mat-icon>payment</mat-icon>Make Payment</button>
+        </mat-card-actions>
+      </form>
+    </mat-card>
+    <div *ngIf="!newAddressForm">
+      <button color="primary" class="checkout-button" mat-raised-button (click)="showNewAddressForm(true)">
+        <mat-icon>add</mat-icon>New Address</button>
+      <mat-card *ngFor="let address of addresses; let i=index;" class="address-card" [ngClass]="{'selected': selected === address?._id }"
+        (click)="selectAddress(address)">
+        <mat-card-content>
+          <h3>{{address.name}}</h3>
+          <br/> {{address.address}}, {{address.city}}, {{address.zip}}, {{address.state}}, {{address.phone}}
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-icon-button (click)="editAddress(address)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="removeAddress(address)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <mat-card class="address-card" *ngIf="newAddressForm">
+      <h3>Add New Address</h3>
+      <button mat-button mat-icon-button (click)="showNewAddressForm(false)" class="close">
+        <mat-icon>close</mat-icon>
+      </button>
+      <edit [item]="address" [fields]="fields" api="addresses" (save)="save($event)"></edit>
+    </mat-card>
+  </div>

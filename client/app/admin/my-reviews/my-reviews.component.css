@@ -1,0 +1,26 @@
+.description{
+    margin-bottom: 10px;
+}
+mat-card{
+    margin-bottom: 10px;
+}
+.total{
+    margin-bottom: 10px;
+}
+.reviewRating{
+    font-size: 18px;
+}
+.mat-icon{
+    height: 18px;
+    width: auto;
+}
+.category .mat-icon{
+    font-size: 16px;
+}
+.rating-button {
+    background-color: #32cd32;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 6px;
+    width:40px;
+}

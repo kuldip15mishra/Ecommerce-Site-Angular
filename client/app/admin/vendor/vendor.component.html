@@ -1,0 +1,26 @@
+<div class="app-content cp-container mw350"   >
+  <mat-card class="cp">
+    <mat-toolbar class="mat-accent">
+      <h3 class="mat-toolbar-tools">Vendor Creation</h3>
+    </mat-toolbar>
+    <br/>
+    <form #f="ngForm" (ngSubmit)="cp(f.value)" novalidate autocomplete="off" fxLayout="column" fxLayoutAlign="center stretch">
+      <mat-form-field>
+        
+        <input matInput type="text" #vendorName="ngModel" name="vendorName" ngModel required minlength="3" placeholder="Vendor Name"
+          autofocus />
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" #vendorEmail="ngModel" name="vendorEmail" ngModel required minlength="3" placeholder="Vendor Email"
+        />
+      </mat-form-field>
+     
+      <mat-form-field>
+        <input matInput type="password" #vendorPassword="ngModel" name="vendorPassword" ngModel required minlength="3" placeholder="Vendor Password"
+        />
+      </mat-form-field>
+   
+      <submit-button [loading]="loading" [form]="f" icon="lock" text="Create Vendor"></submit-button>
+    </form>
+  </mat-card>
+</div>

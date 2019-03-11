@@ -1,0 +1,141 @@
+<megamenu></megamenu>
+<mat-sidenav-container class="products-container">
+  <mat-sidenav #sidenav mode="side" [opened]="isLargeScreen()" class="filter-container">
+    <form [formGroup]="filterForm" #form autocomplete="false" novalidate>
+      <mat-card>
+        <button class="close" mat-button mat-icon-button (click)="sidenav.close()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <mat-card-content>
+          <h3>Adjust Price</h3>
+          <nouislider [config]="priceSliderConfig" [min]="priceRange.min" [max]="priceRange.max" (change)="priceSliderChanged($event)"
+            [tooltips]="[ true, true ]" style="margin-top: 4em;"></nouislider>
+        </mat-card-content>
+      </mat-card>
+      <mat-card>
+        <mat-card-content>
+          <h4>Filter Brands</h4>
+          <div class="filter-brands">
+            <div *ngFor="let i of brands">
+              <mat-checkbox (click)="toggleBrands(i, fl.brands)">{{i.name}}</mat-checkbox>
+            </div>
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <div class="filter-features">
+        <mat-card *ngFor="let k of features">
+          <mat-card-content>
+            <h4>{{k.key}}</h4>
+            <p *ngFor="let i of k.v">
+              <mat-checkbox (checked)="exists(i, fl.features[k.key])" (click)="toggleFeatures(i, k.key)">{{i}}</mat-checkbox>
+            </p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </form>
+  </mat-sidenav>
+
+  <div [ngBusy]="busy"></div>
+
+  <div fxLayout="column" fxLayoutAlign="space-between center" fxFlex style="height:100px !important;">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" style="width:100%">
+      <div fxLayout="row" fxLayoutAlign="start center">
+        <button class="app-icon-button" (click)="sidenav.toggle()">
+          <i class="material-icons app-toolbar-menu dark">filter_list</i>
+        </button>
+        <span>Showing {{meta.skip}} of {{meta.total}}</span>
+      </div>
+      <span class="app-toolbar-filler"></span>
+
+      <div fxLayout="row" fxLayoutAlign="start center" *ngIf="products.length>0">
+        <span fxHide.xs>Sort: &nbsp;</span>
+        <mat-button-toggle-group #group="matButtonToggleGroup">
+          <mat-button-toggle value="price" (click)="sortNow('variants.price')">
+            {{Settings.currency.symbol}}
+            <mat-icon>arrow_downward</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="-price" (click)="sortNow('-variants.price')">
+            {{Settings.currency.symbol}}
+            <mat-icon>arrow_upward</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="name" (click)="sortNow('name')">
+            A-Z
+            <mat-icon>arrow_downward</mat-icon>
+          </mat-button-toggle>
+          <mat-button-toggle value="-name" (click)="sortNow('-name')">
+            Z-A
+            <mat-icon>arrow_upward</mat-icon>
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+    </div>
+
+    <div class="applied-filters" fxLayout="row" fxLayoutAlign="center start">
+      <div *ngFor="let b of fl.brands" class="applied-filters">
+        <button mdButton mat-raised-button>
+          <mat-icon mat-menu-align-target>verified_user</mat-icon>
+          {{b.name}}
+        </button>
+      </div>
+      <button *ngIf="searchParam" mat-raised-button routerLink="/shop">
+        <mat-icon mat-menu-align-target>subject</mat-icon>
+        {{searchParam}}
+      </button>
+      <div *ngIf="categoryQueried && fl && fl.categories" class="applied-filters">
+        <button *ngFor="let c of fl.categories" mat-raised-button>
+          <mat-icon mat-menu-align-target>subject</mat-icon>
+          {{c.slug}}
+        </button>
+      </div>
+      <div *ngIf="fl.features.Type" class="applied-filters">
+        <button *ngFor="let f of fl.features.Type" mat-raised-button>
+          <mat-icon mat-menu-align-target>format_shapes</mat-icon>
+          {{f}}
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="fl.features.Fit" class="applied-filters">
+        <button *ngFor="let f of fl.features.Fit" mat-raised-button>
+          <mat-icon mat-menu-align-target>format_shapes</mat-icon>
+          {{f}}
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="fl.features.Fabric" class="applied-filters">
+        <button *ngFor="let f of fl.features.Fabric" mat-raised-button>
+          <mat-icon mat-menu-align-target>format_shapes</mat-icon>
+          {{f}}
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="fl.features.Neck" class="applied-filters">
+        <button *ngFor="let f of fl.features.Neck" mat-raised-button>
+          <mat-icon mat-menu-align-target>format_shapes</mat-icon>
+          {{f}}
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+      <div *ngIf="fl.features.Color" class="applied-filters">
+        <button *ngFor="let f of fl.features.Color" mat-raised-button>
+          <mat-icon mat-menu-align-target>format_shapes</mat-icon>
+          {{f}}
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+    </div>
+    
+    <mat-card *ngIf="!meta.busy &&  products.length===0" class="noproduct" fxLayoutAlign="center center" fxLayout="column">
+      <div>No Product match the search criteria</div>
+      <button mat-button mat-raised-button class="mat-primary" routerLink="/shop">
+        <mat-icon>home</mat-icon>Browse All...</button>
+    </mat-card>
+    <div class="product-cards" infinite-scroll infiniteScrollDistance="1" infiniteScrollThrottle="300" (scrolled)="scroll()"
+      fxFlex>
+      <product-card *ngFor="let product of products" [parentCategoryID]="parentCategoryID" [product]="product" class="product-card products"></product-card>
+    </div>
+  </div>
+</mat-sidenav-container>
+<div style="text-align:center" *ngIf="!meta.busy">
+  <button mat-button mat-raised-button (click)="scroll()" *ngIf="!meta.end">
+    <mat-icon>arrow_downwards</mat-icon>Load More...</button>
+</div>

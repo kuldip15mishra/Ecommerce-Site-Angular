@@ -1,0 +1,59 @@
+<mat-toolbar color="primary">
+  <div fxLayout="row" fxFlex fxLayoutAlign="start center">
+    <div fxLayout="row" *ngIf="!searchBar">
+      <button mat-icon-button>
+        <mat-icon>home</mat-icon>
+      </button>
+      <div routerLink="/shop" fxHide.xs *ngIf="!searchBar" class="brand">SalientInk</div>
+    </div>
+    <i class="material-icons clearSearchBarField noUserSelect" *ngIf="searchBar" (click)="show(false)">close</i>
+
+    <salientink-search fxFlex fxHide fxShow.gt-sm *ngIf="!searchBar"></salientink-search>
+    <salientink-search fxFlex *ngIf="searchBar"></salientink-search>
+
+    <div fxShow fxHide.gt-sm layoutAlign="center center" *ngIf="!searchBar">
+      <mat-icon (click)="show(true)" class="search-icon">search</mat-icon>
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="end center">
+    <button mat-raised-button class="mat-raised mat-accent" *ngIf="!searchBar" (click)="openCart()" [disabled]="cart.getTotalCount()===0">
+      <mat-icon>shopping_cart</mat-icon>
+      <span fxShow fxHide.xs>Cart ({{cart.getTotalCount()}}) - {{cart.getTotalPrice() | currency:Settings.currency.code}}</span>
+    </button>
+    <button mat-button (click)="login()" *ngIf="!auth.loggedIn &&  !searchBar" fxLayout="column">
+      <mat-icon>fingerprint</mat-icon>
+      <span fxHide fxShow.gt-xs>Login / Signup</span>
+    </button>
+    <button mat-button *ngIf="auth.loggedIn && !searchBar" routerLink="/admin/dashboard">
+      <mat-icon *ngIf="!auth.loggedIn">fingerprint</mat-icon>
+      <button mat-fab *ngIf="auth.loggedIn" class="avatar">
+        <img class="avatar_img" src="{{auth.currentUser.avatar}}" alt="{{auth.currentUser.name}}" />
+      </button>
+      <span fxShow="false" fxShow.gt-sm>{{auth.currentUser.name}}</span>
+    </button>
+    <button mat-icon-button [matMenuTriggerFor]="menu" *ngIf="auth.loggedIn && !searchBar">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <div *ngFor="let item of Settings.menu">
+          <button mat-menu-item *ngIf="auth.loggedIn && item.authenticate && auth.hasRole(item.authenticate) && (auth.currentUser.role ==='privatevendor' && item.name ==='Create Private User')" routerLink="{{item.url}}">
+              <mat-icon>{{item.icon}}</mat-icon>
+              <span>{{item.name}}</span>
+            </button>
+            <button mat-menu-item *ngIf="auth.loggedIn && item.authenticate && auth.hasRole(item.authenticate) && (auth.currentUser.role ==='privatevendor' && item.name !=='Create Private User')" routerLink="{{item.url}}">
+                <mat-icon>{{item.icon}}</mat-icon>
+                <span>{{item.name}}</span>
+              </button>
+        <button mat-menu-item *ngIf="auth.loggedIn && item.authenticate && auth.hasRole(item.authenticate) && (auth.currentUser.role !=='privatevendor' && item.name !=='Create Private User')" routerLink="{{item.url}}">
+          <mat-icon>{{item.icon}}</mat-icon>
+          <span>{{item.name}}</span>
+        </button>
+      </div>
+
+      <button mat-menu-item *ngIf="auth.loggedIn" (click)="auth.logout()">
+        <mat-icon>vpn_key</mat-icon>
+        <span>Logout</span>
+      </button>
+    </mat-menu>
+  </div>
+</mat-toolbar>

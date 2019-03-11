@@ -1,0 +1,31 @@
+<div [formGroup]="variantsForm">
+  <td>
+    <img [src]="'uploads/'+variantsForm.value?.image" alt="" />
+  </td>
+  <td>
+    <mat-form-field>
+      <input matInput formControlName="size" placeholder="Size" />
+    </mat-form-field>
+  </td>
+  <td>
+    <mat-form-field>
+      <input matInput formControlName="weight" placeholder="Weight" />
+    </mat-form-field>
+  </td>
+  <td>
+    <mat-form-field>
+      <input matInput formControlName="mrp" placeholder="MRP" />
+    </mat-form-field>
+  </td>
+  <td>
+    <mat-form-field>
+      <input matInput formControlName="price" placeholder="Price" />
+    </mat-form-field>
+  </td>
+  <td>
+    <mat-form-field>
+      <input matInput formControlName="image" placeholder="Image" />
+      <mat-icon matPrefix (click)="chooseImage() " class="pointer ">image</mat-icon>
+    </mat-form-field>
+  </td>
+</div>

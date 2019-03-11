@@ -1,0 +1,23 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+  <h2>
+    <span class="mute">My Account</span> > Customer Orders</h2>
+</div>
+<div [ngBusy]="busy"></div>
+<mat-tab-group>
+  <mat-tab label="Pending" *ngIf="pending">
+    <order-content [orders]="pending" (changePaymentStatus)="changePaymentStatus($event)" (changeOrderStatus)="changeOrderStatus($event)"
+      (cancelOrder)="cancelOrder($event)"></order-content>
+  </mat-tab>
+  <mat-tab label="Shipped" *ngIf="shipped">
+    <order-content [orders]="shipped" (changePaymentStatus)="changePaymentStatus($event)" (changeOrderStatus)="changeOrderStatus($event)"
+      (cancelOrder)="cancelOrder($event)"></order-content>
+  </mat-tab>
+  <mat-tab label="Cancelled" *ngIf="cancelled">
+    <order-content [orders]="cancelled" (changePaymentStatus)="changePaymentStatus($event)" (changeOrderStatus)="changeOrderStatus($event)"
+      (cancelOrder)="cancelOrder($event)"></order-content>
+  </mat-tab>
+  <mat-tab label="Delivered" *ngIf="delivered">
+    <order-content [orders]="delivered" (changePaymentStatus)="changePaymentStatus($event)" (changeOrderStatus)="changeOrderStatus($event)"
+      (cancelOrder)="cancelOrder($event)"></order-content>
+  </mat-tab>
+</mat-tab-group>

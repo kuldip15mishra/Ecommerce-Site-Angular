@@ -1,0 +1,22 @@
+.mw350{
+    min-width: 250px;
+    max-width: 350px;
+}
+.mat-toolbar{
+    margin-top: -23px !important;
+    margin-left: -24px;
+    width: 119%;
+}
+.pointer{
+    cursor: pointer;
+}
+.description{
+    margin-bottom: 10px;
+}
+mat-card{
+    margin: 2%;
+}
+.total{
+    margin-bottom: 10px;
+}
+

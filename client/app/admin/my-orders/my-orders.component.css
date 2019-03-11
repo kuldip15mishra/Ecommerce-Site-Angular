@@ -1,0 +1,18 @@
+.description{
+    margin-bottom: 10px;
+}
+mat-card{
+    margin: 2%;
+}
+.total{
+    margin-bottom: 10px;
+}
+mat-list-item{
+    margin: 10px 10px 10px 0;
+}
+.cancel{
+    border: 2px solid red;
+}
+img{
+    cursor: pointer;
+}

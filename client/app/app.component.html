@@ -1,0 +1,65 @@
+<div class="loading-overlay" *ngIf="loading">
+  <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+</div>
+<div [ngBusy]="busy" *ngIf="loading"></div>
+<mat-sidenav-container>
+  <mat-sidenav #cart mode="over" align="end">
+    <mat-toolbar color="primary">
+      <h2 class="mat-toolbar-tools">Cart Details</h2>
+      <button mat-icon-button class="close" (click)="cart.close()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-toolbar>
+    <mat-list>
+      <mat-list-item *ngFor="let i of cartItems">
+        <img mat-list-avatar [src]="'uploads/'+i?.image" onError="this.src='/assets/img/product-placeholder.png'" alt="...">
+        <h3 mat-line> {{i.name}} </h3>
+        <p mat-line>
+          <span>
+            <button mat-icon-button class="mat-raised mat-primary" (click)="addItem({sku:i.sku, name:i.name, slug:i.slug, mrp:i.mrp, price:i.price, weight:i.weight, vid:i.vid}, -1)">
+              <i class="material-icons">remove</i>
+            </button>
+            <button mat-button class="mat-primary" routerLink="product/checkout">{{getQ(i.sku, i.vid)}}</button>
+            <button mat-icon-button class="mat-raised mat-primary" (click)="addItem({sku:i.sku, name:i.name, slug:i.slug, mrp:i.mrp, price:i.price, weight:i.weight, vid:i.vid}, +1)">
+              <i class="material-icons">add</i>
+            </button>
+          </span>
+        </p>
+        <p mat-line>
+          {{i.price | currency:Settings.currency.code}} * {{i.quantity}} = {{i.price * i.quantity | currency:Settings.currency.code}}
+        </p>
+        <div class="close">
+          <button mat-icon-button (click)="addItem({sku:i.sku, vid: i.vid}, -10000000)">
+            <mat-icon>close</mat-icon>
+          </button>
+        </div>
+        <hr/>
+      </mat-list-item>
+      <h3 mat-subheader>Summary</h3>
+
+      <div *ngIf="getTotalP()>0">
+        <mat-list-item>
+          <p mat-line>
+            <b>Shipping:</b>
+            <span *ngIf="shipping?.best.charge<=0">&nbsp;Free</span>
+            <span *ngIf="shipping?.best.charge>0">&nbsp;{{shipping?.best.charge | currency:Settings.currency.code}}</span>
+          </p>
+        </mat-list-item>
+        <mat-list-item>
+          <p mat-line>
+            <b>Grand Total:</b> {{getTotalP() + shipping?.best.charge | currency:Settings.currency.code}}
+          </p>
+        </mat-list-item>
+      </div>
+    </mat-list>
+    <mat-toolbar>
+      <button mat-raised-button [disabled]="cartItems.length <=0" class="mat-primary" (click)="cart.close()" routerLink="/checkout">
+        <mat-icon>local_grocery_store</mat-icon>Checkout →</button>
+    </mat-toolbar>
+  </mat-sidenav>
+  <header (openCrt)="cart.open()"> </header>
+  <div class="app-height">
+    <router-outlet></router-outlet>
+  </div>
+  <footer></footer>
+</mat-sidenav-container>

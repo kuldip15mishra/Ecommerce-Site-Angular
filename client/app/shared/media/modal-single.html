@@ -1,0 +1,19 @@
+<div mat-dialog-actions>
+    <button class="close" mat-icon-button color="warn" (click)="dialogRef.close()">
+        <mat-icon>cancel</mat-icon>
+    </button>
+</div>
+<h1 mat-dialog-title>Please choose image to upload</h1>
+<div mat-dialog-content></div>
+<input type="file" ng2FileSelect [uploader]="uploader" name="avatar" />
+<div mat-dialog-actions *ngFor="let item of uploader.queue" class="flex space-between">
+    <div *ngIf="item.progress">{{item.progress}}%</div>
+    <!--<mat-progress-bar color="accent" mode="determinate" [value]="item.progress" aria-label="uploading image" *ngIf="item.progress"></mat-progress-bar>-->
+    <button mat-raised-button (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess" class="mat-warn">
+        <i class="material-icons" *ngIf="!item.progress">save</i>
+        <mat-spinner color="#fff" class="button-spinner" mode="determinate" [value]="item.progress" aria-label="uploading image"
+            *ngIf="item.progress">
+        </mat-spinner>
+        <span>Upload</span>
+    </button>
+</div>

@@ -1,0 +1,34 @@
+<div class="app-content row center">
+  <div class="column center">
+    <mat-card>
+      <mat-toolbar class="mat-accent">
+        <h3 class="mat-toolbar-tools">Forgot Password</h3>
+      </mat-toolbar>
+      <br/>
+      <form [formGroup]="form" (ngSubmit)="forgot(form.value)" autocomplete="false" novalidate>
+        <section class="section" layout="column">
+          <div class="help-block" [hidden]="!errMessage">
+            {{ errMessage?.message }}
+          </div>
+          <div>
+            <mat-form-field>
+              <input matInput type="email" name="email" formControlName="email" placeholder="Email" autofocus />
+            </mat-form-field>
+            <div [hidden]="form.get('email').valid || (form.get('email').pristine && !submitted)">
+              <div *ngIf="form.get('email').hasError('required')" class="error">
+                Email is required
+              </div>
+              <div *ngIf="form.get('email').hasError('minlength')" class="error">
+                Email must be minimum 3 characters
+              </div>
+              <div *ngIf="form.get('email').hasError('pattern')" class="error">
+                Email address is invalid.
+              </div>
+            </div>
+            <submit-button [form]="form" text="Send Reset Password Email" icon="email"></submit-button>
+          </div>
+        </section>
+      </form>
+    </mat-card>
+  </div>
+</div>

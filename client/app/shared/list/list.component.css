@@ -1,0 +1,15 @@
+.mat-fab{
+  position:absolute !important;
+  bottom:20px;
+  right:20px;
+}
+.mat-icon-button .mat-icon {
+    font-size: 24px;
+}
+.mat-icon-button .mat-icon.filtericon {
+    padding-top:20px;
+}
+.sort .mat-icon {
+    font-size: 18px;
+}
+

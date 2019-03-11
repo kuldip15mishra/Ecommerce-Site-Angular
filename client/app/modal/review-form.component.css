@@ -1,0 +1,22 @@
+.angular-material-rating{
+    margin: 0 20px;
+    cursor: pointer;
+}
+.angular-material-rating .button {
+  cursor: pointer; 
+}
+.angular-material-rating .button mat-icon {
+  font-size: 30px; 
+}
+.angular-material-rating {
+  text-shadow: 0.06em .04em #000000; 
+}
+.angular-material-rating .star-on mat-icon {
+  color: limegreen; 
+}
+.angular-material-rating .star-off mat-icon {
+  color: #ddd; 
+}
+.error{
+  color: mediumvioletred;
+}

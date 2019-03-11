@@ -1,0 +1,6 @@
+img{
+  max-height:40vh !important;
+}
+.mat-form-field .mat-icon{
+  cursor: pointer;
+}

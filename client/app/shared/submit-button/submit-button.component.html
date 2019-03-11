@@ -1,0 +1,9 @@
+<div layout="column" align="center stretch">
+  <button mat-raised-button type="submit" fxFlex class="mat-raised circular-progress-button mat-primary" [disabled]="!form.valid || loading || disabled"
+    style="width:100%">
+    <i class="material-icons" *ngIf="!loading">{{icon}}</i>
+    <mat-spinner [diameter]="28" [strokeWidth]="3" color="#fff" class="app-spinner" mode="indeterminate" *ngIf="loading" aria-label="Please wait.">
+    </mat-spinner>
+    <span>{{text}}</span>
+  </button>
+</div>

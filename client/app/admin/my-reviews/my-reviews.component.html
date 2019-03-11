@@ -1,0 +1,38 @@
+<div fxLayout="column" fxLayoutAlign="center center">
+    <h2>
+        <span class="mute">My Account</span> > My Reviews</h2>
+    <mat-form-field>
+        <input matInput placeholder="Search Reviews" [disabled]="!reviews || reviews.length===0">
+    </mat-form-field>
+</div>
+
+<div [ngBusy]="busy"></div>
+<div class="mt20" fxLayout="column" fxLayoutAlign="center center">
+    <div class="mt20" fxLayout="column" fxLayoutAlign="center start">
+        <mat-card *ngIf="!reviews || reviews.length===0" class="noproduct" fxLayoutAlign="start start" fxLayout="column">
+            <div>No Reviews yet</div>
+        </mat-card>
+        <mat-card *ngFor="let review of reviews;let i = index;" fxFlex.gt-md="80" fxFlex.gt-sm="80" fxFlex="70" fxFlex.xs="90">
+            <mat-card-header>
+                <button mat-button mat-icon-button (click)="delete(review._id)" class="close">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <img mat-card-avatar [src]="'uploads/'+review?.image" onError="this.src='/assets/img/product-placeholder.png'">
+                <mat-card-title>
+                    <a class="product-link" routerLink="/product/{{review.pslug}}/{{review.pid}}">{{review.pname}}</a>
+                </mat-card-title>
+                <mat-card-subtitle fxLayout="row" fxLayoutAlign="space-between center">
+                    <div fxFlex fxLayout="row">Rating:&nbsp;
+                        <div class="rating-button" fxLayout="row" fxLayoutAlign="space-between center">
+                            <div>{{review.rating}}</div>
+                            <mat-icon class="reviewRating">star</mat-icon>
+                        </div>
+                    </div>
+                    Created: {{review.created | date}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <p>{{review.message}}</p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

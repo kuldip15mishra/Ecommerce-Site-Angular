@@ -1,0 +1,191 @@
+mat-card{
+    margin-bottom: 10px;
+}
+.card-actions{
+    color:#777;
+    padding-left: 70px;
+}
+list-image{
+    margin-left:-20px;
+}
+.card-actions .material-icons{
+    font-size: 15px;
+}
+.reviewRating{
+    font-size: 18px;
+}
+.mat-icon{
+    margin-top: 2px;
+    height: 18px;
+    width: auto;
+}
+.rating-signal .mat-icon{
+    margin-top: -7px;
+    height: 18px;
+    width: auto;
+}
+.category .mat-icon{
+    font-size: 16px;
+}
+.rating-button {
+    background-color: #32cd32;
+    color: #fff;
+    border-radius: 4px;
+    padding: 0 6px;
+    width:40px;
+}
+.subheader {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, .54);
+  text-align: left;
+  height: 32px;
+  padding-top: 8px;
+  margin-left: 16px;
+}
+ 
+.list {
+  font-size: 1rem;
+  color: rgba(0, 0, 0, .87);
+  text-align: left;
+  height: 20px;
+  padding-top: 5px;
+  display: block;
+  border-bottom: 1px solid rgba(0,0,0,.12);
+ }
+ 
+.side-thumb img{
+    width: 100%;
+    max-width: 100px;    
+    cursor: pointer;
+}
+.main-product{
+    flex:4;
+    margin: 0 10px;
+    max-width: 550px;        
+}
+.main-product img{
+    width: 100%;
+}
+.reviews list-image div, list-image img {
+    margin: 0;
+}
+.reviews{
+    padding: 20px 0;
+}
+.reviews list-image div {
+  text-align: center;
+}
+.reviews mat-card-actions span{
+    margin-left: 10px;
+    color: #999;
+}
+.reviews mat-card mat-card-content{
+    padding: 0 16px;
+}
+.reviews .reviews-header .total-rating{
+    margin: 10px 50px 10px 10px;
+    
+}
+.reviews .rating-signal mat-progress-linear{
+    width:150px;
+    margin: 0 20px;
+}
+.reviews .reviews-header .total{
+    font-size: 2em;
+    margin-bottom : 2px;
+}
+
+.reviews mat-card-header-text .mat-subhead .rating-button{
+    font-size: 1.1em;
+    background-color: limegreen;
+    color: #fff;
+    width: 35px;
+    border-radius: 4px;
+    padding: 0 6px;
+}
+.reviews mat-card-header-text .mat-subhead .rating-button ng-mat-icon{
+    margin-top: -3px;
+}
+.product-description{
+    margin: 10px;
+}
+.product-details-container .price{
+  font-size: 25px;
+  color: #555;
+}
+.product-details-container .price .text-muted{
+  font-size: 28px;
+  color: #333;
+}
+.product-details-container .mat-content{
+    margin-left: 10px;
+}
+/*.side-thumb{
+    width:150px;
+}*/
+.side-thumb mat-card{
+    cursor: pointer;
+    max-width: 150px;
+}
+.side-thumb mat-card img{
+    max-width: 150px;
+}
+/*.product-details-container mat-card img{
+    width:100%;
+}*/
+.big-thumb{
+    width:40%;
+}
+.detail-cta{
+    width:15%;
+}
+ul.filter-list{
+    padding-left: 0;
+}
+ul.filter-list li {
+    cursor: pointer;
+}
+.open .filters-col {
+    position: relative;
+}
+.filters-col {
+    background-color: #ffffff;
+}
+.filters-col {
+    width: 280px;
+    float: left;
+    transition: opacity 300ms ease-out 0s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    padding: 4px 20px 4px;
+    position: absolute;
+}
+.filters-col__collapse__title {
+    cursor: pointer;
+    padding: 20px 20px 20px 0;
+    margin-top: 0 !important;
+    position: relative;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
+h4 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 1.692em;
+    padding: 0 0 0.9em;
+    margin: 0;
+}
+.filters-col__collapse__content {
+    padding-bottom: 15px;
+}
+.filter-list li {
+    margin: 0 0 5px;
+    text-transform: uppercase;
+}
+
+.checkbox-group {
+    position: relative;
+}
+
+
+

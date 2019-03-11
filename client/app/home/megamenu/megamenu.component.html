@@ -1,0 +1,19 @@
+<div id="wrapper">
+ 
+  <nav>
+    <ul id="menu">
+      <li *ngFor="let c of categories">
+         
+        <a  class="cursor">{{c.name}}</a>
+        <div id="mega" style="z-index:10000">
+          <ul>
+          
+            <li *ngFor="let h of c.children">
+              
+              <a routerLink="/product/category/{{h.slug}}/{{h._id}}/{{c._id}}">{{h.name}}</a> </li>
+          </ul>
+        </div>
+      </li>
+    </ul>
+  </nav>
+</div>

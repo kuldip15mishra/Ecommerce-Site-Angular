@@ -1,0 +1,14 @@
+.description{
+    margin-bottom: 10px;
+}
+mat-card{
+    margin: 2%;
+    padding-top: 25px;
+}
+.total{
+    margin-bottom: 10px;
+}
+img{
+    height:180px;
+    margin-bottom:10px;
+}

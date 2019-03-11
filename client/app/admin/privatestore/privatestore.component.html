@@ -1,0 +1,25 @@
+<div class="app-content cp-container mw350">
+    <mat-card class="cp">
+      <mat-toolbar class="mat-accent">
+        <h3 class="mat-toolbar-tools">User Creation</h3>
+      </mat-toolbar>
+      <br/>
+      <form #f="ngForm" (ngSubmit)="cp(f.value)" novalidate autocomplete="off" fxLayout="column" fxLayoutAlign="center stretch">
+        <mat-form-field>
+          <input matInput type="text" #userName="ngModel" name="userName" ngModel required minlength="3" placeholder="User Name"
+            autofocus />
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput type="text" #userEmail="ngModel" name="userEmail" ngModel required minlength="3" placeholder="User Email"
+          />
+        </mat-form-field>
+       
+        <mat-form-field>
+          <input matInput type="password" #userPassword="ngModel" name="userPassword" ngModel required minlength="3" placeholder="User Password"
+          />
+        </mat-form-field>
+     
+        <submit-button [loading]="loading" [form]="f" icon="lock" text="Create Private User"></submit-button>
+      </form>
+    </mat-card>
+  </div>

@@ -1,0 +1,87 @@
+.dashboard-cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+/*.dashboard-card{
+  max-width: 250px;
+  cursor: pointer;
+  margin: 20px;   
+}*/
+.gradient-card{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px;
+  color:#fff;
+  width: 250px;
+  margin: 20px; 
+  cursor: pointer;
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+  border-radius: 3px;
+  background: linear-gradient(60deg, #40c4ff, #0091ea);
+}
+.gradient-card mat-icon{
+  margin-right: 30px;
+  font-size: 48px;
+  margin-top: -4px;
+  opacity: 0.3;
+}
+.gradient-card .header{
+  font-size: 1.2em;
+}
+.gradient-card .content{
+  font-size: 0.9em;
+}
+.gradient-card .item{
+    box-sizing: border-box;
+    max-height: 100%;
+    display: flex;
+    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    justify-content: flex-start;
+    align-items: center;
+    align-content: center;
+    -webkit-box-pack: start;
+    -webkit-box-align: center;
+    color: rgb(255, 255, 255);
+}
+.purple{
+  background: linear-gradient(60deg, rgb(140, 153, 224), rgb(101, 114, 184));  
+}
+.grey{
+  background: linear-gradient(60deg, #607d8b, #263238);
+}
+.blue{
+  background: linear-gradient(60deg, rgb(77, 208, 226), rgb(76, 168, 186));
+}
+.light-blue{
+  background: linear-gradient(60deg, #40c4ff, #0091ea);
+}
+.green{
+  background: linear-gradient(60deg, rgb(129, 198, 131), rgb(98, 168, 100));
+}
+.yellow{
+  background: linear-gradient(60deg, #fbc02d, #f57f17);
+}
+.brown{
+  background: linear-gradient(60deg, #8d6e63, #5d4037);
+}
+.orange{
+  background: linear-gradient(60deg, #ff5722 , #bf360c );
+}
+.red{
+  background: linear-gradient(60deg, #e53935, #b71c1c);
+}
+.pink{
+  background: linear-gradient(60deg, #ff4081, #c51162);
+}
+.teal{
+  background: linear-gradient(60deg, #00897b , #004d40);
+}
+.black{
+  background: linear-gradient(60deg, #666 , #000);
+}
+.lime{
+  background: linear-gradient(60deg, #aeea00, #64dd17);
+}

@@ -1,0 +1,30 @@
+.card-footer{
+  color:#999;
+  font-size: .8em;
+}
+.dashboard-cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.dashboard-card{
+  max-width: 250px;
+  margin-right: 20px;   
+  overflow: hidden;
+}
+.dashboard-card img{
+  max-height: 250px;  
+  width: auto;
+}
+
+.my-drop-zone { background: #F8F8F8;
+    border: 5px dashed #DDD;
+    text-align: center;
+    padding: 25px;
+    margin: 10px; }
+.nv-file-over { border: dotted 3px red; } /* Default class applied to drop zones on over */
+
+.example-card {
+  width: 400px;
+  margin:10px;
+}

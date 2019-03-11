@@ -1,0 +1,19 @@
+<div [ngBusy]="busy"></div>
+<div class="app-content">
+  <mat-card>
+    <mat-card-header class="row space-between">
+      <button type="button" mat-icon-button mat-mini-fab color="warn" routerLink="/admin/order">
+        <i class="material-icons pull-left">close</i>
+      </button>
+      <div class="flex">
+        {{header}}
+      </div>
+      <div>
+        <export></export>
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <edit [item]="item" [cols]="cols" api="orders" (save)="saveOrder($event)"></edit>
+    </mat-card-content>
+  </mat-card>
+</div>

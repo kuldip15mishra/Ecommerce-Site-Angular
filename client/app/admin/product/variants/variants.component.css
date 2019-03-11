@@ -1,0 +1,15 @@
+img{
+  width:52px;
+  height:auto;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,.2), 0 6px 20px 0 rgba(0,0,0,.19);
+}
+td img {
+    width: 52px;
+    margin: 0 10px 0 0;
+    padding: 1px;
+    border: 1px solid #eee;
+    background-color: #fff;
+}
+mat-form-field mat-icon{
+  cursor: pointer;
+}

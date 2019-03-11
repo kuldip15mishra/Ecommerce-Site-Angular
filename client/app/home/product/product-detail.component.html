@@ -1,0 +1,163 @@
+<megamenu></megamenu>
+<div [ngBusy]="busy"></div>
+<div class="page-title">
+  <div class="sort-products mat-whiteframe-z2">
+    <div>
+      <a routerLink="/">Home</a> >
+      <a routerLink="/shop">Products</a> > {{product.name}}
+    </div>
+  </div>
+</div>
+<div fxLayout="row" fxLayout.xs="column">
+  <div fxLayout="row" fxLayout.xs="column">
+    <div class="side-thumb" fxLayout="column" fxLayout.xs="row" fxFlexOrder.xs=1>
+      <div *ngFor="let v of product.variants; let i = index;" (click)="changeIndex(i);">
+        <img *ngIf="v.size!=product.variants[selectedIndex]?.size" [src]="'uploads/'+v.image" onError="this.src='/assets/img/product-placeholder.png'"
+          alt="{{product.name}}" />
+      </div>
+    </div>
+    <div class="column main-product">
+      <img [src]="'uploads/'+product?.variants[selectedIndex]?.image" onError="this.src='/assets/img/product-placeholder.png'"
+        alt="{{product.name}}" />
+    </div>
+  </div>
+  <div class="product-description">
+    <h2 class="name">{{product.name}}</h2>
+    <mat-divider>
+    </mat-divider>
+    <br/>
+    <div class="price">
+      <div class="price">Price:
+        <span class="text-muted">{{product.variants[selectedIndex]?.price | currency : Settings.currency.code}}</span>
+      </div>
+      <del *ngIf="product?.variants[selectedIndex]?.price!=product.variants[selectedIndex]?.mrp">
+        MRP: {{product?.variants[selectedIndex]?.mrp | currency : Settings.currency.code}}
+      </del>
+    </div>
+    Seller:
+    <a (click)="gotoVendor(product.vendor_id)">{{product.vendor_name}}</a>
+    <br/>
+    <mat-divider>
+    </mat-divider>
+    <br/>
+
+    <div class="row">
+      <cart-buttons [variant]="product.variants[selectedIndex]" [product]="product"></cart-buttons>
+      <wish-button [variant]="product.variants[selectedIndex]" [product]="product"></wish-button>
+    </div>
+    <br/>
+    <div fxLayout="row" fxLayout.xs="column" class="category">
+      <div class="row" *ngIf="product.variants[selectedIndex]?.size">
+        <mat-icon>format_shapes</mat-icon>
+        <div> Size: &nbsp; </div>
+        <b> {{product.variants[selectedIndex]?.size}} </b>
+      </div>
+      <div class="row" *ngIf="product.brand">
+        <mat-icon>verified_user</mat-icon>
+        <div> Brand: &nbsp; </div>
+        <b> {{product.brand.name}} </b>
+      </div>
+      <div class="row" *ngIf="product.category">
+        <mat-icon>subject</mat-icon>
+        <div> Category: &nbsp; </div>
+        <b> {{product.category?.name}} </b>
+      </div>
+    </div>
+    <br/>
+    <mat-divider>
+    </mat-divider>
+    <div *ngIf="product.info">
+      <b>Description: </b>
+      <div class="description">
+        {{product.info}}
+      </div>
+    </div>
+    <br/>
+    <mat-divider>
+    </mat-divider>
+    <div *ngIf="product.keyFeatures && product.keyFeatures?.length>0">
+      <div class="subheader">Key Features </div>
+      <ul>
+        <li *ngFor="let k of product.keyFeatures" class="list">
+          <b>{{k.key}}</b> : {{k.val}}</li>
+      </ul>
+    </div>
+    <div *ngIf="product.features && product.features?.length>0">
+      <div class="subheader"> Features </div>
+      <ul>
+        <li *ngFor="let k of product.features" class="list">
+          <b>{{k.key}}</b> : {{k.val}}</li>
+      </ul>
+    </div>
+    <div class="rows" *ngIf="reviewSettings?.enabled && reviews?.length===0">
+      <button mat-raised-button (click)="reviewForm()" class="mat-raised circular-progress-button mat-primary">
+        <i class="material-icons">star</i> Be the first to review this item
+      </button>
+    </div>
+    <div class="reviews">
+      <div class="reviews-header" fxLayout="row">
+        <div *ngIf="reviews?.length>0 && reviewSettings.enabled" fxFlex fxLayout="row" fxLayoutAlign="center start">
+          <div class="total-rating">
+            <div class="total"> {{rating.avg}}
+              <mat-icon>star</mat-icon>
+            </div>
+            <div>{{rating.count}} Ratings</div>
+            <div>{{reviewCount}} Reviews</div>
+          </div>
+          <div class="rating-signal" fxFlex>
+            <div fxLayout="row" fxLayoutAlign="start center">5&nbsp;
+              <mat-icon color="fill:rgb(33,150,243)">star</mat-icon>
+              <mat-progress-bar color="primary" mat-mode="determinate" value="{{rating.r5*100 / rating.count}}">
+              </mat-progress-bar>{{rating.r5}}</div>
+            <div fxLayout="row" fxLayoutAlign="start center">4&nbsp;
+              <mat-icon color="fill:rgb(33,150,243)">star</mat-icon>
+              <mat-progress-bar mat-mode="determinate" value="{{rating.r4*100 / rating.count}}">
+              </mat-progress-bar>{{rating.r4}}</div>
+            <div fxLayout="row" fxLayoutAlign="start center">3&nbsp;
+              <mat-icon color="fill:rgb(33,150,243)">star</mat-icon>
+              <mat-progress-bar color="accent" mat-mode="determinate" value="{{rating.r3*100 / rating.count}}">
+              </mat-progress-bar>{{rating.r3}}</div>
+            <div fxLayout="row" fxLayoutAlign="start center">2&nbsp;
+              <mat-icon color="fill:rgb(255,87,34)">star</mat-icon>
+              <mat-progress-bar color="warn" mat-mode="determinate" value="{{rating.r2*100 / rating.count}}">
+              </mat-progress-bar>{{rating.r2}}</div>
+            <div fxLayout="row" fxLayoutAlign="start center">1&nbsp;
+              <mat-icon color="fill:rgb(255,87,34)">star</mat-icon>
+              <mat-progress-bar color="warn" mat-mode="determinate" value="{{rating.r1*100 / rating.count}}">
+              </mat-progress-bar>{{rating.r1}}</div>
+          </div>
+        </div>
+        <div fxFlexOffset="25px" fxLayout="row" fxLayoutAlign="center center" *ngIf="reviewSettings?.enabled && reviews?.length > 0">
+          <button mat-raised-button class="mat-raised circular-progress-button mat-primary" (click)="reviewForm()">Rate & Review</button>
+        </div>
+      </div>
+      <mat-card *ngFor="let review of reviews">
+        <button class="close" mat-icon-button *ngIf="myReview(review)" (click)="deleteReview(review)">
+          <mat-icon style="fill: #aaa">delete</mat-icon>
+        </button>
+        <div>
+          <div fxLayout="row" fxLayoutAlign="start start">
+            <list-image [string]="review.message || review.rating"></list-image>
+            <div fxLayout="column" fxFlex>
+              <div *ngIf="review.rating" class="rating-button" fxLayout="row" fxLayoutAlign="space-between center">
+                <div>{{review.rating}}</div>
+                <mat-icon class="reviewRating">star</mat-icon>
+              </div>
+              <div fxLayout="column">
+                <div>{{review.message}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <mat-card-actions class="card-actions">
+          <div fxLayout="row" fxLayoutAlign="start center">
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <i class="material-icons">person</i>&nbsp;{{review.reviewer}}&nbsp;
+              <i class="material-icons">access_time</i>&nbsp;{{review.created | amTimeAgo}}
+            </div>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

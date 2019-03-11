@@ -1,0 +1,27 @@
+<div>
+  <section fxLayout="column" fxLayoutAlign="start center">
+    <h1 fxFlex>Rating & Review</h1>
+    <form [formGroup]="myForm" #form autocomplete="false" novalidate fxLayout="column" fxLayoutAlign="start center">
+      <div class="row">
+        <div class="angular-material-rating" *ngFor="let item of starsArray; let i = index;">
+          <a class="button star-button" [class]="item.class" (mouseover)="setMouseOverRating(i + 1)" (mouseleave)="setMouseOverRating(rating)"
+            (click)="setRating(i + 1)">
+            <mat-icon>star</mat-icon>
+          </a>
+        </div>
+      </div>
+      <br/>
+      <mat-form-field fxLayout="row" fxLayoutAlign="center center">
+        <textarea matInput formControlName="message" placeholder="Message"></textarea>
+      </mat-form-field>
+      <div class="error">{{message}}</div>
+      <div class="mat-dialog-actions" fxLayout="row" fxLayoutAlign="center stretch">
+        <button type="button" mat-raised-button class="mat-primary" (click)="dialogRef.close({rating: rating, message: myForm.value.message})"
+          fxFlex>
+          <mat-icon>save</mat-icon>
+          Save</button>
+        <button type="button" mat-button (click)="dialogRef.close()">Cancel</button>
+      </div>
+    </form>
+  </section>
+</div>

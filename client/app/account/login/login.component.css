@@ -1,0 +1,12 @@
+.container{
+  max-width:700px;
+}
+.pointer{
+  cursor: pointer;
+}
+.mat-dialog-container{
+  padding:0px !important;
+}
+.muted{
+  font-size:9px;
+}

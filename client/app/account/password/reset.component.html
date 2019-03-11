@@ -1,0 +1,28 @@
+<div class="app-content row center">
+  <div class="column center">
+    <mat-card class="cp">
+      <mat-toolbar class="mat-accent">
+        <h3 class="mat-toolbar-tools">Reset Password</h3>
+      </mat-toolbar>
+      <br/>
+      <form [formGroup]="form" (ngSubmit)="reset(form.value)" autocomplete="false" novalidate>
+        <section class="section" layout="column">
+          <div class="help-block" [hidden]="!errMessage">
+            {{ errMessage?.message }}
+          </div>
+          <div>
+            <mat-form-field>
+              <input matInput type="password" name="password" formControlName="password" placeholder="New Password" autofocus />
+            </mat-form-field>
+            <br/>
+            <mat-form-field>
+              <input matInput type="password" name="passwordcf" formControlName="passwordcf" placeholder="Confirm Password" />
+            </mat-form-field>
+
+            <submit-button [form]="form" text="Reset Password" icon="vpn_key"></submit-button>
+          </div>
+        </section>
+      </form>
+    </mat-card>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div [ngBusy]="busy"></div>
+<div class="mt20" fxLayoutAlign="center center">
+  <mat-card fxFlex.gt-md="40" fxFlex.gt-sm="50" fxFlex="60" fxFlex.xs="90">
+    <mat-card-header fxLayout="row" fxLayoutAlign="center center">
+      <h3>{{title}}</h3>
+      <button mat-button mat-raised-button routerLink="/admin/features" class="close">Back
+        <mat-icon>keyboard_return</mat-icon>
+      </button>
+    </mat-card-header>
+    <mat-card-content>
+      <edit [item]="feature" [fields]="fields" api="features" (save)="save($event)"></edit>
+    </mat-card-content>
+  </mat-card>
+</div>

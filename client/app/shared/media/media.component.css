@@ -1,0 +1,36 @@
+.well{
+  padding: 50px;
+}
+.my-drop-zone {
+    border: dotted 3px lightgray;
+}
+
+.nv-file-over {
+    border: dotted 3px red;
+}
+/* Default class applied to drop zones on over */
+
+.another-file-over-class {
+    border: dotted 3px green;
+}
+
+.flex {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+}
+.row{
+  flex-direction: row;
+}
+.space-between{
+  justify-content: space-between;
+}
+.pull-left{
+  align-self: flex-start;
+}
+.pull-right{
+  align-self: flex-end;
+}
+.app-spinner{
+  width:20px;
+}

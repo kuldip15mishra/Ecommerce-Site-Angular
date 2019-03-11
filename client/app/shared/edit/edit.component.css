@@ -1,0 +1,20 @@
+.flex {
+  flex-direction: column;
+  display: flex;
+  flex: 1;
+}
+.row{
+  flex-direction: row;
+}
+.space-between{
+  justify-content: space-between;
+}
+.pull-left{
+  align-self: flex-start;
+}
+.pull-right{
+  align-self: flex-end;
+}
+.mat-form-field .mat-icon{
+  cursor: pointer;
+}

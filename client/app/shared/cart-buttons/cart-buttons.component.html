@@ -1,0 +1,19 @@
+<section *ngIf="cart.checkCart(product?._id, variant?._id)">
+  <div>
+    <button mat-raised-button class="mat-raised circular-progress-button mat-primary" (click)="addItem(product, variant)">
+      <i class="material-icons">shopping_cart</i>Add to cart
+    </button>
+  </div>
+</section>
+
+<section *ngIf="!cart.checkCart(product?._id, variant?._id)">
+  <button mat-icon-button class="mat-raised mat-primary" (click)="addItem(product, variant,-1)">
+    <i class="material-icons">remove</i>
+  </button>
+
+  <button mat-button class="mat-primary" routerLink="/checkout">Buy {{cart.getQuantity(product?._id, variant?._id)}}</button>
+
+  <button mat-icon-button class="mat-raised mat-primary" (click)="addItem(product, variant,1)">
+    <i class="material-icons">add</i>
+  </button>
+</section>

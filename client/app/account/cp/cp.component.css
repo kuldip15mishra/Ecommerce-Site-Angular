@@ -1,0 +1,6 @@
+.cp-container{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.cp{width: 400px;}

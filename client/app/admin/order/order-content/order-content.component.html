@@ -1,0 +1,69 @@
+<mat-card *ngFor="let order of orders">
+  <mat-card-header class="m10">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxFlex>
+      <div fxFlex>
+        <mat-card-title>OrderNo: {{order.orderNo}}</mat-card-title>
+        <mat-card-subtitle>{{order.createdAt | date}}</mat-card-subtitle>
+      </div>
+      <div class="total" fxFlex>Order Total
+        <b>{{order.amount.total / order.amount.exchange_rate | currency : Settings.currency.code}}</b>
+      </div>
+      <div fxFlex>
+        <mat-card-title>Payment</mat-card-title>
+        <mat-card-subtitle> {{order.payment?.method}} </mat-card-subtitle>
+      </div>
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start" fxFlex>
+        <div>
+          <mat-card-title>Order Status</mat-card-title>
+          <mat-card-subtitle>
+            <mat-select name="orderStatus-{{i}}" [(ngModel)]="order.status" (change)="orderStatus(order, $event)" style="width:140px;"
+              placeholder="Order Status" floatPlaceholder="never">
+              <mat-option *ngFor="let o of Settings.orderStatus" [value]="o">{{o}}</mat-option>
+            </mat-select>
+          </mat-card-subtitle>
+        </div>
+        <div>
+          <mat-card-title>Payment Status</mat-card-title>
+          <mat-card-subtitle *ngIf="order.payment">
+            <mat-select ngModel name="paymentStatus-{{i}}" [(ngModel)]="order.payment.state" placeholder="Payment Status" floatPlaceholder="never"
+              (change)="paymentStatus(order,$event)">
+              <mat-option *ngFor="let o of Settings.paymentStatus" [value]="o">{{o}}</mat-option>
+            </mat-select>
+          </mat-card-subtitle>
+        </div>
+      </div>
+    </div>
+  </mat-card-header>
+  <mat-card-content fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between start">
+    <div class="description" fxFlex>
+      <mat-list>
+        <mat-list-item *ngFor="let i of order.items" fxLayout="row">
+          <img mat-list-avatar src="{{i.url}}" onError="this.src='/assets/img/product-placeholder.png'" routerLink="/product/{{i.description}}/{{i.sku}}">
+          <div fxFlexOffset="2">
+            <div mat-line>
+              <b>
+                <a class="product-link" routerLink="/product/{{i.description}}/{{i.sku}}">{{i.name}}</a>
+              </b>
+            </div>
+            <div mat-line>
+              <b>Amount:</b> {{i.price / order.amount.exchange_rate | currency : Settings.currency.code}} x
+              <b>{{i.quantity}}</b>
+            </div>
+          </div>
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="address">
+      <div mat-line>
+        <b>Address</b>
+      </div>
+      <hr/>
+      <div mat-line class="mute">
+        {{order.address.line1}}
+        <br/> {{order.address.city}}
+        <br/> {{order.address.country_code}}
+        <br/> {{order.address.postal_code}}
+      </div>
+    </div>
+  </mat-card-content>
+</mat-card>

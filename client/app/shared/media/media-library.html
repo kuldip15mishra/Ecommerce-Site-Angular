@@ -1,0 +1,45 @@
+<div mat-dialog-actions>
+    <button class="close" mat-icon-button color="warn" (click)="dialogRef.close()">
+        <mat-icon>cancel</mat-icon>
+    </button>
+</div>
+<div mat-dialog-content>
+    <mat-progress-bar mode="determinate" [value]="uploader.progress" *ngIf="uploader?.queue?.length>0">
+    </mat-progress-bar>
+    <div fxLayout="row" fxLayoutAlign="center center">
+        <input type="file" ng2FileSelect [uploader]="uploader" name="avatar" />
+        <div *ngFor="let item of uploader.queue" class="flex space-between">
+            <button mat-raised-button (click)="item.upload()" [disabled]="item.isReady || item.isUploading || item.isSuccess" class="mat-warn">
+                <i class="material-icons">save</i> Upload </button>
+        </div>
+    </div>
+    <br/>
+    <mat-grid-list class="media-list" cols="3" rowHeight="4:3" gutterSize="12" fxLayout="row" fxLayoutAlign="space-between center"
+        fxLayoutWrap>
+        <mat-grid-tile *ngFor="let i of media" (click)="ok(i.path)">
+            <mat-card class="card">
+                <button mat-button mat-icon-button (click)="close()" class="close">
+                    <mat-icon>close</mat-icon>
+                </button>
+                <mat-card-header>
+                    <h3>{{i.name}}</h3>
+                </mat-card-header>
+                <mat-card-content fxLayout="row" fxLayoutAlign="center center">
+                    <img src="{{i.path}}" draggable="false" alt="{{i.name}}">
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+    <!--<mat-card class="card" *ngFor="let p of media; let i = index;" id="{{p?._id}}">
+        <mat-card-header>
+            <mat-card-title>{{p.name}}</mat-card-title>
+            <mat-card-subtitle>{{p.path}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image [src]="p?.path">
+        <mat-card-actions>
+            <button mat-button><b>Uploaded by:</b> {{p.uname}} ({{p.uemail}})</button>
+            <button mat-button><b>Size:</b>{{ p.size/1024/1024 | number:'.2' }} MB</button>
+            <button mat-button><b>Created:</b> {{p.createdAt}}</button>
+        </mat-card-actions>
+    </mat-card>-->
+</div>

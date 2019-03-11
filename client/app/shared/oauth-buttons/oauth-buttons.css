@@ -1,0 +1,18 @@
+.app-spinner {
+  height: 30px;
+  width: 30px;
+  display: inline-block;
+  color: #fff;
+}
+.mat-hue-2{
+  color:white;
+}
+.facebook{
+  background-color:rgb(21,101,192);
+}
+.google{
+  background-color:rgb(216,67,21);
+}
+.twitter{
+  background-color:rgb(33,150,243);
+}

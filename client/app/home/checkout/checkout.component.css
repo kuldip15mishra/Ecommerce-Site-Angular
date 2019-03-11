@@ -1,0 +1,30 @@
+.center{
+  display:flex;flex-direction: column;justify-content: start;
+}
+.close-button{
+    cursor: pointer;
+}
+.container{
+  display: flex; 
+  justify-content: center;
+  
+}
+.checkout-card{
+  /*width: 40em;*/
+  margin: 10px;
+}
+.address-card{
+  width: 15em;
+  margin: 10px;
+  cursor: pointer;  
+}
+.checkout-button{
+  width: 100%;
+  margin-bottom: 10px;
+}
+.selected{
+  border:1px solid yellow;
+}
+.w100{
+  max-width:100px;
+}

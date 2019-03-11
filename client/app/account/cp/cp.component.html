@@ -1,0 +1,36 @@
+<div class="app-content cp-container">
+  <mat-card class="cp">
+    <mat-toolbar class="mat-accent">
+      <h3 class="mat-toolbar-tools">Change Password</h3>
+    </mat-toolbar>
+    <br/>
+    <form #f="ngForm" (ngSubmit)="cp(f.value)" novalidate autocomplete="off" fxLayout="column" fxLayoutAlign="center stretch">
+      <mat-form-field>
+        <input matInput type="password" #oldPassword="ngModel" name="oldPassword" ngModel required minlength="3" placeholder="Current Password"
+          autofocus />
+      </mat-form-field>
+      <div *ngIf="oldPassword.errors && (oldPassword.dirty || oldPassword.touched)" class="alert">
+        <div [hidden]="!oldPassword.errors.required">
+          Password is required
+        </div>
+        <div [hidden]="!oldPassword.errors.minlength">
+          Password must be at least 3 characters long.
+        </div>
+      </div>
+      <br/>
+      <mat-form-field>
+        <input matInput type="password" #newPassword="ngModel" name="newPassword" ngModel required minlength="3" placeholder="New Password"
+        />
+      </mat-form-field>
+      <div *ngIf="newPassword.errors && (newPassword.dirty || newPassword.touched)" class="alert">
+        <div [hidden]="!newPassword.errors.required">
+          New Password is required
+        </div>
+        <div [hidden]="!newPassword.errors.minlength">
+          Password must be at least 3 characters long.
+        </div>
+      </div>
+      <submit-button [loading]="loading" [form]="f" icon="lock" text="Change Password"></submit-button>
+    </form>
+  </mat-card>
+</div>

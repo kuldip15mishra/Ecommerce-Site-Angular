@@ -1,0 +1,127 @@
+<div class="app-content row">
+  <mat-card class="item">
+    <button mat-button mat-icon-button (click)="dialogRef.close()" class="close">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-tab-group class="row">
+      <mat-tab label="Login">
+        <div class="col center">
+          <!-- remove in production -->
+          <p class="muted">User account is
+            <code>user@sportscenter.com</code> /
+            <code>qwerty</code>
+            <br/> Vendor account is
+            <code>vendor@sportscenter.com</code> /
+            <code>qwerty</code>
+            <br/> Private Vendor account is
+            <code>privatevendor@sportscenter.com</code> /
+            <code>qwerty</code>
+            <br/> Admin account is
+            <code>admin@sportscenter.com</code> /
+            <code>qwerty</code>
+            <br/>
+          </p>
+          <!-- /remove in production -->
+          <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)" autocomplete="false" novalidate>
+            <section class="section" layout="column">
+              <!--<div class="help-block" [hidden]="!errMessage">
+                {{ errMessage }}
+              </div>-->
+              <div>
+                <mat-form-field style="width:100%">
+                  <input matInput type="email" name="email" formControlName="email" placeholder="Email" mongoose-error />
+                </mat-form-field>
+                <div [hidden]="loginForm.get('email').valid || (loginForm.get('email').pristine && !submitted)">
+                  <div *ngIf="loginForm.get('email').hasError('required')" class="error">
+                    Email is required
+                  </div>
+                  <div *ngIf="loginForm.get('email').hasError('minlength')" class="error">
+                    Email must be minimum 3 characters
+                  </div>
+                  <div *ngIf="loginForm.get('email').hasError('pattern')" class="error">
+                    Email address is invalid.
+                  </div>
+                </div>
+              </div>
+              <div>
+                <mat-form-field>
+                  <input matInput type="password" name="password" formControlName="password" placeholder="Password" />
+                </mat-form-field>
+                <div [hidden]="loginForm.get('password').valid || (loginForm.get('password').pristine && !submitted)">
+                  <div *ngIf="loginForm.get('password').hasError('required')" class="error">
+                    Password is required
+                  </div>
+                  <div *ngIf="loginForm.get('password').hasError('minlength')" class="error">
+                    Password must be minimum 3 characters
+                  </div>
+                </div>
+              </div>
+              <p class="pointer">
+                <a class="err" (click)="gotoForgotPassword(loginForm.value.email)">+ Forgot Password</a>
+              </p>
+            </section>
+            <submit-button [loading]="loading" [form]="loginForm" icon="lock" text="Secure Login"></submit-button>
+          </form>
+        </div>
+
+      </mat-tab>
+      <mat-tab label="Signup">
+        <div class="col center">
+          <form [formGroup]="signupForm" (ngSubmit)="signup(signupForm.value)" autocomplete="false" novalidate>
+            <!--<div class="help-block" [hidden]="!signupErrMessage">
+              {{ signupErrMessage }}
+            </div>-->
+            <div>
+              <mat-form-field style="width:100%">
+                <input matInput type="text" name="name" formControlName="name" placeholder="Name" />
+              </mat-form-field>
+              <div [hidden]="signupForm.get('name').valid || (signupForm.get('name').pristine && !submitted)">
+                <div *ngIf="signupForm.get('name').hasError('required')" class="error">
+                  Name is required
+                </div>
+              </div>
+
+            </div>
+            <div>
+              <mat-form-field style="width:100%">
+                <input matInput type="email" name="email" formControlName="email" mongoose-error placeholder="Email" />
+              </mat-form-field>
+              <div [hidden]="signupForm.get('email').valid || (signupForm.get('email').pristine && !submitted)">
+                <div *ngIf="signupForm.get('email').hasError('required')" class="error">
+                  Email is required
+                </div>
+                <div *ngIf="signupForm.get('email').hasError('minlength')" class="error">
+                  Email must be minimum 3 characters
+                </div>
+                <div *ngIf="signupForm.get('email').hasError('pattern')" class="error">
+                  Email address is invalid.
+                </div>
+              </div>
+              <!--<div class="help-block" [hidden]="!errMessage" class="alert alert-danger">
+                  {{ errMessage }}
+                </div>-->
+            </div>
+            <div>
+              <mat-form-field>
+                <input matInput type="password" name="password" formControlName="password" placeholder="Password" />
+              </mat-form-field>
+              <div [hidden]="signupForm.get('password').valid || (signupForm.get('password').pristine && !submitted)">
+                <div *ngIf="signupForm.get('password').hasError('required')" class="error">
+                  Password is required
+                </div>
+                <div *ngIf="signupForm.get('password').hasError('minlength')" class="error">
+                  Password must be minimum 3 characters
+                </div>
+              </div>
+            </div>
+            <submit-button [loading]="loading" [form]="signupForm" icon="lock" text="Signup"></submit-button>
+          </form>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+    <mat-card-actions>
+      <br/>
+      <oauth-buttons classes="btn-block"></oauth-buttons>
+    </mat-card-actions>
+  </mat-card>
+</div>
